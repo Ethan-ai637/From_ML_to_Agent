@@ -29,24 +29,19 @@ flowchart LR
 全书反复使用几个母问题。为兼容 GitHub 的数学渲染器，这里的 README 只使用其稳定支持的 LaTeX 子集；教材 PDF 中保留完整排版。
 
 $$
-\theta^{\star} \in \arg\min_{\theta}
-\frac{1}{n}\sum_{i=1}^{n} L\bigl(f_{\theta}(x_i), y_i\bigr)
+\theta^{\star}=\mathrm{argmin}_{\theta}\frac{1}{n}\sum_{i=1}^{n}L(f_{\theta}(x_i),y_i)
 $$
 
 $$
-p_{\theta}(x_{1:T})
-= \prod_{t=1}^{T} p_{\theta}\bigl(x_t \mid x_{1:t-1}\bigr)
+p_{\theta}(x_{1:T})=\prod_{t=1}^{T}p_{\theta}(x_t\mid x_{1:t-1})
 $$
 
 $$
-\mathrm{Attention}(Q,K,V)
-= \mathrm{softmax}\!\left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}\right)V
+\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
 
 $$
-b_{t+1}(s') \propto
-p(o_{t+1}\mid s')
-\sum_s P(s'\mid s,a_t)b_t(s)
+b_{t+1}(s')\propto p(o_{t+1}\mid s')\sum_s P(s'\mid s,a_t)b_t(s)
 $$
 
 它们看起来来自不同领域，但这本书希望让读者看到：**ML → LLM → Agent 并不是三个彼此割裂的技术栈，而是函数学习、概率建模、表示学习、优化和序贯决策逐步叠加的结果。**
