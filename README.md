@@ -10,7 +10,7 @@
 
 **当前冻结版本：v2.4 Final · 300 页 · 5 篇 · 22 章。**
 
-[📖 阅读教材 PDF](book/From_ML_to_Agent_v2.4.pdf) · [🧪 运行 Labs](labs/) · [👩‍🏫 教师解答手册](instructor/Instructor_Solution_Manual_v2.4.pdf) · [✅ Final QA](docs/FINAL_QA_REPORT.md)
+[📖 分章阅读教材](book/) · [🧪 运行 Labs](labs/) · [👩‍🏫 教师解答手册](instructor/Instructor_Solution_Manual_v2.4.pdf) · [✅ Final QA](docs/FINAL_QA_REPORT.md)
 
 ---
 
@@ -18,33 +18,35 @@
 
 ```mermaid
 flowchart LR
-    A[数据与经验风险] --> B[向量 / 概率 / 信息]
-    B --> C[优化与泛化]
-    C --> D[线性模型与神经网络]
-    D --> E[序列概率与表示]
-    E --> F[Attention]
-    F --> G[Transformer]
-    G --> H[LLM 预训练与 Scaling]
-    H --> I[ICL / Reasoning / Post-training]
-    I --> J[RAG 与外部证据]
-    J --> K[MDP / POMDP]
-    K --> L[Tool Use / Planning]
-    L --> M[Memory / Multi-Agent / Agent Learning]
+    A[Part I<br/>数据 · 几何 · 概率 · 信息 · 优化]
+    B[Part II<br/>线性模型 · 神经网络 · Autodiff]
+    C[Part III<br/>序列概率 · Attention · Transformer]
+    D[Part IV<br/>Pretraining · ICL · Reasoning · Alignment]
+    E[Part V<br/>RAG · POMDP · Planning · Agent Learning]
+    A --> B --> C --> D --> E
 ```
 
-全书反复使用几个母问题：
+全书反复使用几个母问题。为兼容 GitHub 的数学渲染器，这里的 README 只使用其稳定支持的 LaTeX 子集；教材 PDF 中保留完整排版。
 
 $$
-\theta^*=\arg\min_\theta \frac1n\sum_{i=1}^n \ell(f_\theta(x_i),y_i),
-\qquad
-p_\theta(x_{1:T})=\prod_{t=1}^T p_\theta(x_t\mid x_{<t}),
+\theta^{\star} \in \arg\min_{\theta}
+\frac{1}{n}\sum_{i=1}^{n} L\bigl(f_{\theta}(x_i), y_i\bigr)
 $$
 
 $$
-\operatorname{Attention}(Q,K,V)
-=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V,
-\qquad
-b_{t+1}(s')\propto p(o_{t+1}\mid s')\sum_s P(s'\mid s,a_t)b_t(s).
+p_{\theta}(x_{1:T})
+= \prod_{t=1}^{T} p_{\theta}\bigl(x_t \mid x_{1:t-1}\bigr)
+$$
+
+$$
+\mathrm{Attention}(Q,K,V)
+= \mathrm{softmax}\!\left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}\right)V
+$$
+
+$$
+b_{t+1}(s') \propto
+p(o_{t+1}\mid s')
+\sum_s P(s'\mid s,a_t)b_t(s)
 $$
 
 它们看起来来自不同领域，但这本书希望让读者看到：**ML → LLM → Agent 并不是三个彼此割裂的技术栈，而是函数学习、概率建模、表示学习、优化和序贯决策逐步叠加的结果。**
@@ -72,6 +74,8 @@ $$
 | **Part IV · 大语言模型理论** | 15–18 | 预训练与 Scaling、解码、ICL/Reasoning、SFT/DPO/RLVR |
 | **Part V · 从 LLM 到 Agent** | 19–22 | RAG、MDP/POMDP、Tool Use/Planning、Memory/Multi-Agent/Learning |
 
+完整 22 章的逐章入口见 **[`book/README.md`](book/README.md)**。每章都同时链接对应的 Frontier Lab。
+
 ## Research Frontier：教材知识不是科学的终点
 
 每当一个基础数学对象建立起来，我们都会继续追问：**如果这是已有答案，那么今天的研究者正在试图改变哪一个假设？**
@@ -84,7 +88,7 @@ $$
 
 | 路径 | 内容 |
 |---|---|
-| `book/` | v2.4 Final 学生版教材 PDF（300 页） |
+| `book/` | v2.4 Final 的 22 章分章 PDF 与章节导航 |
 | `instructor/` | Instructor Solution Manual |
 | `labs/` | 6 个基础实验 + 22 个逐章 Frontier Labs |
 | `docs/SOURCES.md` | Frontier 论文身份与来源记录 |
@@ -92,7 +96,7 @@ $$
 | `docs/MATHEMATICAL_REVIEW_REPORT.md` | 数学严谨性审稿记录 |
 | `docs/PEDAGOGY_REVIEW_REPORT.md` | 教学与可视化审稿记录 |
 
-教材 LaTeX 源码不放入公开仓库：公开仓库保留最终 PDF 与真正对读者有用的配套材料，避免排版工程和编译中间产物占据主要空间。
+教材 LaTeX 源码不放入公开仓库：公开仓库保留最终 PDF 与真正对读者有用的配套材料，避免排版工程和编译中间产物占据主要空间。需要在线编辑与重新排版时，使用单独维护的 Overleaf Edition。
 
 ## 运行实验
 
