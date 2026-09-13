@@ -1,0 +1,3 @@
+import numpy as np, matplotlib.pyplot as plt
+from pathlib import Path
+out=Path(__file__).resolve().parents[2]/'figures'/'generated'/'ch15_scaling_coverage.pdf'; out.parent.mkdir(parents=True,exist_ok=True); A,B,a,b=2.8,2.,.34,.28; C=np.logspace(2.2,5.2,34); c=(a*A/(b*B))**(1/(a+b)); N=c*C**(b/(a+b)); D=C/N; t=np.linspace(0,8,120); cov=1-np.exp(-.78*t); nll=3.2-.23*np.log1p(t); fig,ax=plt.subplots(1,2,figsize=(10.5,4)); ax[0].loglog(C,N,label='N'); ax[0].loglog(C,D,label='D'); ax[0].legend(); ax2=ax[1].twinx(); ax[1].plot(t,cov,label='coverage'); ax2.plot(t,nll,ls='--',label='NLL'); fig.tight_layout(); fig.savefig(out)
